@@ -1,5 +1,5 @@
 <template>
-  <div class="content">     
+  <div v-if="availableParts" class="content">     
     <div class="preview">
       <div class="preview-content">
         <div class="top-row">
@@ -47,11 +47,16 @@
   </div>
 </template>
 <script>
-import availableParts from '../data/parts';
+//import availableParts from '../data/parts';
+
+
 import PartSelector from './PartSelector.vue'
 
 export default {
 name:'RobotBuilder',
+created(){
+  this.$store.dispatch('getParts');
+},
 beforeRouteLeave(to,from,next){
   if(this.addedToCart){
     next(true);
@@ -62,8 +67,7 @@ beforeRouteLeave(to,from,next){
 },
 components:{PartSelector},
     data(){
-      return{
-        availableParts,  
+      return{          
         cart:[], 
         addedToCart:false,
         selectedRobot:{
@@ -77,6 +81,9 @@ components:{PartSelector},
     },
 
     computed:{      
+      availableParts(){
+        return this.$store.state.parts;
+      }
     },
 
     methods:{      

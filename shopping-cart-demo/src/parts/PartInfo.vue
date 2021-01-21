@@ -5,7 +5,6 @@
 </template>
 
 <script>
-import parts from '../data/parts';
 export default {
     name:'PartInfo',   
     props:['partType','id'],
