@@ -2,7 +2,7 @@
   <div class="home">
     <center><h1>Welcome to Home Page!</h1>
       <router-link to="/build">Get Stared </router-link>Build your first robot!
-      
+
     </center>
   </div>
 </template>

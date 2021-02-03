@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import axios from 'axios';
+import { resolve } from 'core-js/fn/promise';
 
 
 Vue.use(Vuex);
@@ -19,9 +20,11 @@ export default new Vuex.Store({
         },
     },
     actions:{
-        getParts({commit}){            
-            axios.get('api/parts')
-            .then(result=>commit('updateParts',result.data))
+        getParts({commit}){
+            axios.get('http://localhost:8081/api/parts')
+            .then(result=> {
+              commit('updateParts',result.data)
+            })
             .catch(console.error);
         },
     },
