@@ -1,5 +1,5 @@
 <template>
-  <div v-if="availableParts" class="content">     
+  <div v-if="availableParts" class="content">
     <div class="preview">
       <div class="preview-content">
         <div class="top-row">
@@ -13,8 +13,8 @@
         <div class="bottom-row">
           <img :src="selectedRobot.base.src"/>
         </div>
-        <button class="add-to-cart" @click="addToCart()">Add to cart </button>
-      </div>      
+        <button class="add-to-cart" @click="addToCart()">Add to cart (&#x24;{{total}} ) </button>
+      </div>
     </div>
     <div class="top-row">
       <div class="top part">
@@ -47,7 +47,6 @@
   </div>
 </template>
 <script>
-//import availableParts from '../data/parts';
 
 
 import PartSelector from './PartSelector.vue'
@@ -58,17 +57,27 @@ created(){
   this.$store.dispatch('getParts');
 },
 beforeRouteLeave(to,from,next){
+  console.log(this.selectedRobot.leftArm);
   if(this.addedToCart){
     next(true);
-  } else {
-    const response = confirm('You have not added your robot to your cart, are you sure you want to leave?');
-    next(response);
-  }
+  } else if
+    ((this.selectedRobot.leftArm.id==1)&&
+    (this.selectedRobot.rightArm.id==1)&&
+    (this.selectedRobot.base.id==1)&&
+    (this.selectedRobot.torso.id==1)&&
+    (this.selectedRobot.head.id==1))
+    {
+      next(true);
+    }
+    else{
+            const response = confirm('You have not added your robot to your cart, are you sure you want to leave?');
+            next(response);
+    }
 },
 components:{PartSelector},
     data(){
-      return{          
-        cart:[], 
+      return{
+        cart:[],
         addedToCart:false,
         selectedRobot:{
           head:{},
@@ -76,26 +85,33 @@ components:{PartSelector},
           rightArm:{},
           torso:{},
           base:{},
-        },   
+        },
       };
     },
 
-    computed:{      
+    computed:{
       availableParts(){
         return this.$store.state.parts;
-      }
+      },
+      total(){
+        return (this.selectedRobot.leftArm.cost +
+        this.selectedRobot.rightArm.cost +
+        this.selectedRobot.head.cost +
+        this.selectedRobot.base.cost +
+        this.selectedRobot.torso.cost )
+      },
     },
 
-    methods:{      
+    methods:{
       addToCart(){
-        const robot = this.selectedRobot;      
-        const cost = robot.head.cost 
-        + robot.leftArm.cost 
-        + robot.torso.cost 
-        + robot.rightArm.cost 
+        const robot = this.selectedRobot;
+        const cost = robot.head.cost
+        + robot.leftArm.cost
+        + robot.torso.cost
+        + robot.rightArm.cost
         + robot.base.cost;
         this.$store.commit('addRobotToCart',
-        Object.assign({},robot,{cost}));      
+        Object.assign({},robot,{cost}));
         this.addedToCart=true;
       },
     }
@@ -108,7 +124,7 @@ components:{PartSelector},
   width:165px;
   height:165px;
   border: 3px solid #aaa;
-} 
+}
 .part img {
   width:165px;
 }
@@ -171,20 +187,20 @@ components:{PartSelector},
 .left .next-selector {
   top: auto;
   bottom: -28px;
-  left: -3px;    
+  left: -3px;
   width: 144px;
   height: 25px;
 }
 .right .prev-selector {
   top: -28px;
-  left: 24px;  
+  left: 24px;
   width: 144px;
   height: 25px;
 }
 .right .next-selector {
   top: auto;
   bottom: -28px;
-  left: 24px;    
+  left: 24px;
   width: 144px;
   height: 25px;
 }
@@ -216,8 +232,8 @@ components:{PartSelector},
   position:relative;
 }
 .add-to-cart {
-  position: absolute;  
-  width: 210px;  
+  position: absolute;
+  width: 210px;
   padding: 3px;
   font-size: 16px;
 }

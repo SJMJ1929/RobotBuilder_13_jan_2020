@@ -18,6 +18,9 @@ export default new Vuex.Store({
         updateParts(state,parts){
             state.parts = parts;
         },
+        buyNow(state){
+          state.cart = [];
+        },
     },
     actions:{
         getParts({commit}){

@@ -29,7 +29,7 @@ export default new Router(
             },
             {
                 path:'/build',
-                name:'RobotBuilder',                
+                name:'RobotBuilder',
                 components:{
                     default:RobotBuilder,
                     sidebar:SidebarBuild,
@@ -68,11 +68,11 @@ export default new Router(
                 component:PartInfo,
                 props:true,
                 beforeEnter(to,from,next){
-                    if (!(isNaN(to.params.id) 
-                    || to.params.id < 1 
+                    if (!(isNaN(to.params.id)
+                    || to.params.id < 1
                     || to.params.id > 10)) {
                         next(true);
-                    }                     
+                    }
                 }
             },
             {
