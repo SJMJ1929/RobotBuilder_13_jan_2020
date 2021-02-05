@@ -9,8 +9,6 @@
 
 <script>
 
-import availableParts from '../data/parts';
-
 function getPreviousValidIndex(index, length) {
   const deprecatedIndex = index - 1;
   return deprecatedIndex < 0 ? length - 1 : deprecatedIndex;
@@ -40,12 +38,12 @@ export default {
       return this.parts[this.selectedPartIndex];
     },
   },
-  created(){    
+  created(){
     this.emitSelectedPart();
-  }, 
-  updated(){    
+  },
+  updated(){
     this.emitSelectedPart();
-  },  
+  },
   methods: {
     showPartInfo(){
         this.$router.push({
@@ -63,13 +61,13 @@ export default {
       this.selectedPartIndex = getNextValidIndex(
         this.selectedPartIndex,
         this.parts.length,
-      );      
+      );
     },
     selectPreviousPart() {
       this.selectedPartIndex = getPreviousValidIndex(
         this.selectedPartIndex,
         this.parts.length,
-      );      
+      );
     },
 
   },

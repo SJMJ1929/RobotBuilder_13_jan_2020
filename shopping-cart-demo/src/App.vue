@@ -6,22 +6,21 @@
       <ul>
         <li class="nav-item">
           <router-link  class="nav-link" :to="{name:'Home'}" exact>
-            <img class="logo" src="./assets/build-a-bot-logo.png"/>
             Build-a-Bot
           </router-link>
         </li>
         <li class="nav-item">
-          <router-link active-class="active-link" class="nav-link" :to="{name:'RobotBuilder'}" exact>            
+          <router-link active-class="active-link" class="nav-link" :to="{name:'RobotBuilder'}" exact>
             Build
           </router-link>
         </li>
         <li class="nav-item">
-          <router-link active-class="active-link" class="nav-link" :to="{name:'BrowseParts'}" exact>            
+          <router-link active-class="active-link" class="nav-link" :to="{name:'BrowseParts'}" exact>
             Browse Parts
           </router-link>
         </li>
         <li class="nav-item cart">
-          <router-link active-class="active-link" class="nav-link" :to="{name:'Cart'}" exact>            
+          <router-link active-class="active-link" class="nav-link" :to="{name:'Cart'}" exact>
             Cart
           </router-link>
           <div class="cart-items" >
@@ -34,7 +33,7 @@
   <div class="container">
     <aside class="aside">
       <router-view name="sidebar"/>
-    </aside>  
+    </aside>
     <main>
       <router-view/>
     </main>
@@ -46,7 +45,7 @@
 <script>
 import RobotBuilder from './build/RobotBuilder.vue';
 export default {
-  name: 'App',  
+  name: 'App',
   computed :{
     cart(){
        return this.$store.state.cart;
@@ -63,7 +62,7 @@ body{
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
 }
-main{  
+main{
   padding : 30px;
   background-color:white;
   width :964px;
